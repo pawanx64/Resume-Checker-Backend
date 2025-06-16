@@ -1,4 +1,4 @@
-// backend/server.js
+// backend/index.js
 require('dotenv').config(); // Load environment variables
 const express = require('express');
 const cors = require('cors');
@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-app.get("/api",(req,res)=>{
+app.get("/",(req,res)=>{
     res.send(`<h1>This Is HomePage</h1>`);
 })
 
