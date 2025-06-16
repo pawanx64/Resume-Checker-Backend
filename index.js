@@ -34,6 +34,10 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
+app.get("/",(req,res)=>{
+    res.send(`<h1>This Is HomePage</h1>`);
+})
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
     console.log(`Backend URL: http://localhost:${port}`);
