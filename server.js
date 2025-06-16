@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 // Middleware
 app.use(
     cors({
-        origin:["https://resume-checker-frontend-puce.vercel.app"],
+        origin:["https://resume-checker-frontend-puce.vercel.app/"],
         methods:["POST","GET"],
         credentials: true,
     })
@@ -20,10 +20,10 @@ app.use(express.json());
 app.use(fileUpload());
 
 // Routes
-app.use('', uploadRoutes); // Use your routes
+app.use('/', uploadRoutes); // Use your routes
 
 // Basic server check route
-app.get('', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Server is running ✅');
 });
 
