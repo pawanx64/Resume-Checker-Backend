@@ -3,7 +3,7 @@ require('dotenv').config(); // Load environment variables
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
-const uploadRoutes = require('./src/routes/uploadRoutes'); // Import your routes
+const uploadRoutes = require('./routes/uploadRoutes'); // Import your routes
 
 const app = express();
 const port = process.env.PORT || 5000;
