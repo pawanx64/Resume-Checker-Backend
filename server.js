@@ -23,7 +23,7 @@ app.use(fileUpload());
 app.use('', uploadRoutes); // Use your routes
 
 // Basic server check route
-app.get('/', (req, res) => {
+app.get('', (req, res) => {
     res.send('Server is running ✅');
 });
 
