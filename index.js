@@ -11,8 +11,8 @@ const port = process.env.PORT || 5000;
 // Middleware
 app.use(
     cors({
-        origin:["https://resume-checker-frontend-puce.vercel.app"],
-        methods:["POST","GET"],
+        origin: ["https://resume-checker-frontend-puce.vercel.app"],
+        methods: ["POST", "GET"],
         credentials: true,
     })
 );
@@ -26,8 +26,8 @@ app.use((req, res, next) => {
 });
 
 // Basic server check route
-app.get("/",(req,res)=>{
-    console.log('Homepage route hit!'); // Add this log
+app.get("/", (req, res) => {
+    console.log('Homepage route hit!');
     res.send(`<h1>This Is HomePage</h1>`);
 });
 
@@ -36,14 +36,17 @@ app.use('/', uploadRoutes);
 
 // General error handler
 app.use((err, req, res, next) => {
-    console.error('An error occurred:', err.stack); // More descriptive log
+    console.error('An error occurred:', err.stack);
     res.status(500).json({ error: 'Something went wrong on the server.' });
 });
 
 // 404 handler
 app.use((req, res, next) => {
-    console.log(`404 Not Found for: ${req.originalUrl}`); // Add this log
+    console.log(`404 Not Found for: ${req.originalUrl}`);
     res.status(404).json({ error: 'Endpoint not found' });
 });
 
-module.exports = app;
+// 🔥 This was missing!
+app.listen(port, () => {
+    console.log(`✅ Server started at http://localhost:${port}`);
+});
