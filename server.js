@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 // Middleware
 app.use(
     cors({
-        origin:["https://resume-checker-frontend-puce.vercel.app/"],
+        origin:["https://resume-checker-frontend-puce.vercel.app"],
         methods:["POST","GET"],
         credentials: true,
     })
