@@ -49,8 +49,16 @@ Analyze the following resume content and return a JSON response with the followi
   "strengths": [string],
   "weaknesses": [string],
   "tips_for_improvement": [string],
-  "summary": string
+  "summary": string,
+  "modifications": [
+    {
+      "original": string,
+      "updated": string
+    }
+  ]
 }
+
+Feel free to suggest any modifications you would like to make in the resume. For each suggested modification, provide both the original text snippet and your recommended updated text snippet.
 
 Resume Content:
 ---------------------
