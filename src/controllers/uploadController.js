@@ -1,4 +1,3 @@
-// backend/src/controllers/uploadController.js
 
 const geminiModel = require('../config/gemini');
 const { extractTextFromResume } = require('../models/resumeModel');
@@ -13,22 +12,18 @@ const uploadResume = async (req, res) => {
     let uploadPath;
 
     try {
-        // Check if file exists
         if (!req.files || Object.keys(req.files).length === 0) {
             return res.status(400).json({ error: 'No files were uploaded.' });
         }
 
         const resumeFile = req.files.file;
 
-        // Validate file type
         if (!allowedMimeTypes.includes(resumeFile.mimetype)) {
             return res.status(400).json({ error: 'Unsupported file type. Please upload a PDF or DOCX file.' });
         }
 
-        // Save the uploaded file temporarily
         uploadPath = await moveUploadedFile(resumeFile);
 
-        // Extract text from the resume
         let resumeText;
         try {
             resumeText = await extractTextFromResume(uploadPath, resumeFile.mimetype);
@@ -39,7 +34,6 @@ const uploadResume = async (req, res) => {
             });
         }
 
-        // Gemini Prompt
         const prompt = `
 You are an expert resume reviewer and an Applicant Tracking System (ATS).
 Analyze the following resume content and return a JSON response with the following structure:
@@ -68,11 +62,9 @@ ${resumeText}
 Make sure your response is valid JSON without any explanation or extra formatting.
 `;
 
-        // Gemini API call
         const result = await geminiModel.generateContent(prompt);
         const responseText = result.response.text().trim();
 
-        // Parse JSON from Gemini response
         let geminiAnalysis;
         try {
             const jsonMatch = responseText.match(/```json\s*([\s\S]*?)\s*```/);
@@ -86,7 +78,6 @@ Make sure your response is valid JSON without any explanation or extra formattin
             });
         }
 
-        // Send analysis
         res.status(200).json({
             message: "Resume analyzed successfully.",
             analysis: geminiAnalysis
@@ -96,7 +87,6 @@ Make sure your response is valid JSON without any explanation or extra formattin
         console.error("🔥 Internal server error during resume upload/analysis:", err);
         res.status(500).json({ error: 'Internal server error. Please try again later.' });
     } finally {
-        // Always delete temporary file
         if (uploadPath) {
             deleteFile(uploadPath);
         }

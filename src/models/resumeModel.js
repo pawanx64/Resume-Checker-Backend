@@ -1,9 +1,8 @@
-// backend/src/models/resumeModel.js
 const pdf = require('pdf-parse');
 const mammoth = require('mammoth');
 const fs = require('fs');
 
-async function extractTextFromResume(filePath, mimeType) { // This is the function
+async function extractTextFromResume(filePath, mimeType) { 
     if (mimeType === 'application/pdf') {
         const dataBuffer = fs.readFileSync(filePath);
         const data = await pdf(dataBuffer);
@@ -17,5 +16,5 @@ async function extractTextFromResume(filePath, mimeType) { // This is the functi
 }
 
 module.exports = {
-    extractTextFromResume // Exporting it as a property of an object
+    extractTextFromResume 
 };
