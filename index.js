@@ -9,7 +9,7 @@ const port = process.env.PORT || 5000;
 
 app.use(
     cors({
-        origin: ["https://resume-checker-frontend-puce.vercel.app"],
+        origin: ["https://resume-checker-frontend-puce.vercel.app","http://localhost:5173"],
         methods: ["POST", "GET"],
         credentials: true,
     })
